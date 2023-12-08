@@ -1,9 +1,14 @@
-import { createTheme } from "@mui/material";
+import { createTheme, ThemeOptions } from "@mui/material";
 
-export const theme = createTheme({
+
+const themeOptions:ThemeOptions={
   palette: {
     primary: {
       main: "#FF3D00",
     },
+    background: {
+      default: "#FFEBD8",
+    },
   },
-});
+}
+export const theme = createTheme(themeOptions);
