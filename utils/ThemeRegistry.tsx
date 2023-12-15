@@ -40,7 +40,7 @@ export default function ThemeRegistry({ options, children }: { options: any; chi
     return (
       <style
         key={cache.key}
-        data-emotion={`${cache.key} ${names.join(" ")}`}
+        // data-emotion={`${cache.key} ${names.join(" ")}`}
         dangerouslySetInnerHTML={{
           __html: options.prepend ? `@layer emotion {${styles}}` : styles,
         }}
@@ -54,6 +54,6 @@ export default function ThemeRegistry({ options, children }: { options: any; chi
         <CssBaseline />
         {children}
       </ThemeProvider>
-    </CacheProvider>
+    // </CacheProvider>
   );
 }
