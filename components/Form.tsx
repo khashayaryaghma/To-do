@@ -1,4 +1,5 @@
 "use client";
+import { postData } from "@/utils/dataservices";
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { FC } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
@@ -6,18 +7,19 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 interface FormProps {}
 
 interface IFormInput {
-  task: string;
+  title: string;
 }
 
 export const Form: FC<FormProps> = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      task: "",
+      title: "",
     },
   });
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log(data);
+    // postData("http://localhost:8000/tasks", data)
   };
 
   return (
@@ -40,7 +42,7 @@ export const Form: FC<FormProps> = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack direction="row" gap="1rem">
             <Controller
-              name="task"
+              name="title"
               control={control}
               render={({ field }) => <TextField variant="outlined" size="small" {...field} />}
             />
