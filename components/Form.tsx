@@ -11,15 +11,16 @@ interface IFormInput {
 }
 
 export const Form: FC<FormProps> = () => {
-  const { control, handleSubmit } = useForm({
+  const { control, reset, handleSubmit } = useForm({
     defaultValues: {
       title: "",
+      id:""
     },
   });
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-    // postData("http://localhost:8000/tasks", data)
+    postData("http://localhost:8000/tasks", data);
+    reset();
   };
 
   return (
@@ -30,8 +31,8 @@ export const Form: FC<FormProps> = () => {
         borderRadius="10px"
         padding="1rem"
         minHeight="30rem"
-        sx={(theme)=>({
-          boxShadow:theme.shadows[4],
+        sx={(theme) => ({
+          boxShadow: theme.shadows[4],
           backgroundImage:
             "linear-gradient(to right top, #89b9ad, #90c0ad, #9ac7ac, #a6ceab, #b3d4a9, #c0d8aa, #cedbac, #dbdfaf, #e8e1b7, #f2e4c1, #fae7cc, #ffebd8)",
         })}
@@ -41,11 +42,7 @@ export const Form: FC<FormProps> = () => {
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack direction="row" gap="1rem">
-            <Controller
-              name="title"
-              control={control}
-              render={({ field }) => <TextField variant="outlined" size="small" {...field} />}
-            />
+            <Controller name="title" control={control} render={({ field }) => <TextField variant="outlined" size="small" {...field} />} />
             <Button type="submit" variant="outlined">
               Submit
             </Button>

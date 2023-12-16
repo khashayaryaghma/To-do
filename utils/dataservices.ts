@@ -11,7 +11,10 @@ export async function getData(url: string) {
 export async function postData(url: string, data: any) {
   const res = await fetch(url, {
     method: "POST",
-    body: data,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
