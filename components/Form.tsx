@@ -1,6 +1,6 @@
 "use client";
 import { postData } from "@/utils/dataservices";
-import { Button, Container, Stack, TextField, Typography } from "@mui/material";
+import { Button, Container, Snackbar, Stack, TextField, Typography } from "@mui/material";
 import { FC } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 
@@ -11,23 +11,48 @@ interface IFormInput {
 }
 
 export const Form: FC<FormProps> = () => {
-  const { control, reset, handleSubmit } = useForm({
+  const {
+    control,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       title: "",
-      id:""
+      id: "",
     },
   });
-
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     postData("http://localhost:8000/tasks", data);
     reset();
   };
 
+  type Rules = {
+    required: {
+      value: boolean;
+      message: string;
+    };
+    maxLength: {
+      value: number;
+      message: string;
+    };
+  };
+  const rules: Rules = {
+    required: {
+      value: true,
+      message: "required",
+    },
+    maxLength: {
+      value: 10,
+      message: "more than 10",
+    },
+  };
   return (
     <Container maxWidth="xs">
+      <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }} open={errors.title ? true : false} message={errors.title?.message} />
       <Stack
         alignItems="center"
-        marginTop="2rem"
+        marginTop="5rem"
         borderRadius="10px"
         padding="1rem"
         minHeight="30rem"
@@ -42,7 +67,12 @@ export const Form: FC<FormProps> = () => {
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack direction="row" gap="1rem">
-            <Controller name="title" control={control} render={({ field }) => <TextField variant="outlined" size="small" {...field} />} />
+            <Controller
+              name="title"
+              control={control}
+              rules={rules}
+              render={({ field }) => <TextField variant="outlined" size="small" {...field} />}
+            />
             <Button type="submit" variant="outlined">
               Submit
             </Button>
