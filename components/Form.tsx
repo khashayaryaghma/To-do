@@ -3,14 +3,17 @@ import { postData } from "@/utils/dataservices";
 import { Button, Container, Snackbar, Stack, TextField, Typography } from "@mui/material";
 import { FC } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { Tasks } from "./Tasks";
 
-interface FormProps {}
+interface FormProps {
+  tasks: object;
+}
 
 interface IFormInput {
   title: string;
 }
 
-export const Form: FC<FormProps> = () => {
+export const Form: FC<FormProps> = ({ tasks }) => {
   const {
     control,
     reset,
@@ -78,6 +81,7 @@ export const Form: FC<FormProps> = () => {
             </Button>
           </Stack>
         </form>
+        <Tasks data={tasks}/>
       </Stack>
     </Container>
   );
