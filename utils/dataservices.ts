@@ -16,12 +16,6 @@ export const getData = (config: object) => {
     .catch((err) => {
       console.log(err);
     });
-
-  // if (!res.ok) {
-  //   throw new Error("Failed to fetch data");
-  // }
-
-  // return res.json();
 };
 
 const axiosConfigPost = {
@@ -42,24 +36,20 @@ export const postData = (config: object) => {
     .catch((err) => {
       throw new Error(err);
     });
-
-  // if (!res.ok) {
-  //   throw new Error("Failed to fetch data");
-  // }
 };
 
-export const deleteData = async (id :number) => {
+export const deleteData = async (id: number) => {
   try {
-      await axios.delete(`${baseURL}/tasks/${id}`);
-  } catch (error) {
-      console.log(error);
+    await axios.delete(`${baseURL}/tasks/${id}`);
+  } catch (err) {
+    console.log(err);
   }
 };
 
-export const editData = async (id:number, tasks: any) => {
+export const editData = async (id: number, tasks: any) => {
   try {
-      await axios.put(`${baseURL}/tasks/${id}`, tasks);
-  } catch (error) {
-      console.log(error);
+    await axios.put(`${baseURL}/tasks/${id}`, tasks);
+  } catch (err) {
+    console.log(err);
   }
 };

@@ -6,19 +6,15 @@ import { deleteData, editData } from "@/utils/dataservices";
 import { useRouter } from "next/navigation";
 
 interface TasksProps {
-  data: any;
+  data: { title: string; id: number }[];
 }
-type data = {
-  title: string;
-  id: number;
-};
 
 export const Tasks: FC<TasksProps> = ({ data }) => {
   const router = useRouter();
 
   return (
     <Stack marginTop="1.5rem" gap="1rem">
-      {data.map(({ title, id }: data) => (
+      {data.map(({ title, id }) => (
         <Stack direction="row" justifyContent="space-between" alignItems="center" gap="1rem" key={id}>
           <TextField
             defaultValue={title}

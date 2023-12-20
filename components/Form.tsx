@@ -7,7 +7,7 @@ import { Tasks } from "./Tasks";
 import { useRouter } from "next/navigation";
 
 interface FormProps {
-  tasks: object;
+  tasks: { title: string; id: number }[];
 }
 
 interface IFormInput {
