@@ -26,7 +26,7 @@ export const Form: FC<FormProps> = ({ tasks }) => {
     },
   });
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    postData("http://localhost:8000/tasks", data);
+    postData({ url: "/tasks", data: data });
     reset();
   };
 
@@ -81,7 +81,7 @@ export const Form: FC<FormProps> = ({ tasks }) => {
             </Button>
           </Stack>
         </form>
-        <Tasks data={tasks}/>
+        <Tasks data={tasks} />
       </Stack>
     </Container>
   );
