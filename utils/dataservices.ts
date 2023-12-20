@@ -56,9 +56,9 @@ export const deleteData = async (id :number) => {
   }
 };
 
-export const editData = async (id:number, list: any) => {
+export const editData = async (id:number, tasks: any) => {
   try {
-      await axios.put(`${baseURL}/tasks/${id}`, list);
+      await axios.put(`${baseURL}/tasks/${id}`, tasks);
   } catch (error) {
       console.log(error);
   }

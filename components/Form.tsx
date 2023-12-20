@@ -72,7 +72,7 @@ export const Form: FC<FormProps> = ({ tasks }) => {
           Tasks
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack direction="row" gap="1rem">
+          <Stack direction="row" gap="1rem" justifyContent="space-between">
             <Controller
               name="title"
               control={control}
