@@ -1,7 +1,7 @@
 "use client";
 import { postData } from "@/utils/dataservices";
-import { Button, Container, Snackbar, Stack, TextField, Typography } from "@mui/material";
-import { FC } from "react";
+import { Button, CircularProgress, Container, Snackbar, Stack, TextField, Typography } from "@mui/material";
+import { FC, useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Tasks } from "./Tasks";
 import { useRouter } from "next/navigation";
@@ -15,7 +15,8 @@ interface IFormInput {
 }
 
 export const Form: FC<FormProps> = ({ tasks }) => {
-  const router = useRouter()
+  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const {
     control,
     reset,
@@ -27,10 +28,12 @@ export const Form: FC<FormProps> = ({ tasks }) => {
       id: "",
     },
   });
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    postData({ url: "/tasks", data: data });
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    setLoading(true);
+    await postData({ url: "/tasks", data: data });
+    setLoading(false);
     reset();
-    router.refresh()
+    router.refresh();
   };
 
   type Rules = {
@@ -79,8 +82,8 @@ export const Form: FC<FormProps> = ({ tasks }) => {
               rules={rules}
               render={({ field }) => <TextField variant="outlined" size="small" {...field} />}
             />
-            <Button type="submit" variant="outlined">
-              Submit
+            <Button type="submit" variant="outlined" sx={{ width: "5.2rem" }}>
+              {loading ? <CircularProgress size="1.3rem" /> : "Submit"}
             </Button>
           </Stack>
         </form>
