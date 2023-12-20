@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "server": "pnpm json-server --watch db.json --port 8000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
