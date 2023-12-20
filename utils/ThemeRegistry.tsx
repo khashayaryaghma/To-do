@@ -54,6 +54,6 @@ export default function ThemeRegistry({ options, children }: { options: any; chi
         <CssBaseline />
         {children}
       </ThemeProvider>
-    // </CacheProvider>
+    </CacheProvider>
   );
 }
