@@ -4,6 +4,7 @@ import { Button, Container, Snackbar, Stack, TextField, Typography } from "@mui/
 import { FC } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { Tasks } from "./Tasks";
+import { useRouter } from "next/navigation";
 
 interface FormProps {
   tasks: object;
@@ -14,6 +15,7 @@ interface IFormInput {
 }
 
 export const Form: FC<FormProps> = ({ tasks }) => {
+  const router = useRouter()
   const {
     control,
     reset,
@@ -28,6 +30,7 @@ export const Form: FC<FormProps> = ({ tasks }) => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     postData({ url: "/tasks", data: data });
     reset();
+    router.refresh()
   };
 
   type Rules = {
@@ -46,8 +49,8 @@ export const Form: FC<FormProps> = ({ tasks }) => {
       message: "required",
     },
     maxLength: {
-      value: 10,
-      message: "more than 10",
+      value: 15,
+      message: "more than 15",
     },
   };
   return (
