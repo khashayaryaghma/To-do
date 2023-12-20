@@ -47,3 +47,19 @@ export const postData = (config: object) => {
   //   throw new Error("Failed to fetch data");
   // }
 };
+
+export const deleteData = async (id :number) => {
+  try {
+      await axios.delete(`${baseURL}/tasks/${id}`);
+  } catch (error) {
+      console.log(error);
+  }
+};
+
+export const editData = async (id:number, list: any) => {
+  try {
+      await axios.put(`${baseURL}/tasks/${id}`, list);
+  } catch (error) {
+      console.log(error);
+  }
+};
